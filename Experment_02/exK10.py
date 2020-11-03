@@ -5,7 +5,7 @@ import scipy.io as scio
 np.set_printoptions(suppress=True) 
 def sigmoid( z ):
     return 1.0 /(1.0+np.exp(-z))
-
+    
 def grad(train_X, labels, iters=2000):
     m, n = train_X.shape
     # 步长alpha
