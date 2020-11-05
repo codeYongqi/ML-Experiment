@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import matplotlib.pyplot as plt
+import matplotlib
+
+matplotlib.use('tkagg')
 
 #用来正常显示中文
 plt.rcParams['font.sans-serif'] = ['SimHei']
