@@ -14,3 +14,9 @@ def bp_create(x, t, hiddenLayerNum=0, eta=1.0, limit=0.001, maxNum=10, hiddenLay
     #   net                 训练好的三层BP神经网络，是一个字典类型
     #   y                   输出层输出
     #   E_iter              每次迭代的累积误差值，是一个列表
+
+
+
+#sigmoid函数
+def sigmoid( z ):
+    return 1.0 /(1.0+np.exp(-z))
