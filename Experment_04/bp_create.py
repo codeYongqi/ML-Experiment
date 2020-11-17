@@ -20,14 +20,65 @@ def bp_create(x, t, hiddenLayerNum=0, eta=1.0, limit=0.001, maxNum=10, hiddenLay
     d=n #输入的层个数
     l=1 #输出层个数
     hiddenLayerNum = n+1#隐层神经元个数
-
+    #输出层的阈值
     theta = [random.random() for i in range (l)]
+    #输入层的阈值
     gamma = [random.random() for i in range (hiddenLayerNum)]
     #between input side and hide nodes
+    #输入到隐层的权重
     v=[[random.random() for i in range (hiddenLayerNum)]for j in range (d)]
+    #隐层到输出的权重
     w=[[random.random() for i in range (l)] for j in range(hiddenLayerNum)]
 
-    sumE=0
+    eta = 1
+    sum_count=0
+    t = t.T
+    
+    while (sum_count < maxNum) :
+        #输入层*权值
+        sum_count += 1
+        alpha = np.dot(x.T,v)
+        #得到隐层输入
+        b = sigmoid(alpha-gamma,2)         
+        #隐层输出*权值
+        beta = np.dot(b,w)        
+        #输出层输
+        predictY = sigmoid(beta-theta,2)        
+        #求误差
+        E=sum(sum(predictY-t) **2 )/2
+        #更新g
+        g=predictY*(1-predictY)*(t-predictY)        
+        #更新权值e
+        e=b*(1-b)*( (np.dot(w ,g.T)).T )        
+        #更新权值w
+        w += eta*np.dot(b.T,g)
+        #更新阈值
+        theta -= eta*g
+        #更新权值
+        v += eta * np.dot(x ,e)
+        #更新隐层阈值
+        gamma -= eta*g
+        E_iter.append(E) 
+        if(E <= limit) :
+            sum_count += 1
+        else :    
+            sum_count = 0 
+
+    dict = {'v':v,'gamma':gamma,'theta':theta,'w':w} 
+    return dict,predictY,E_iter
+
+#iX is a matrix with a dimension
+def sigmoid(iX,dimension):
+    if dimension==1:
+        for i in range(len(iX)):
+            iX[i] = 1 / (1 + math.exp(-iX[i]))
+    else:
+        for i in range(len(iX)):
+            iX[i] = sigmoid(iX[i],dimension-1)
+    return iX
+
+'''标准BP
+sumE=0
     eta = 0.2
     flag = 1
     maxIter = 5000
@@ -66,14 +117,4 @@ def bp_create(x, t, hiddenLayerNum=0, eta=1.0, limit=0.001, maxNum=10, hiddenLay
     dict = {'alpha':alpha,'gamma':gamma,'theta':theta}
     
     return dict,E_iter
-
-#iX is a matrix with a dimension
-def sigmoid(iX,dimension):
-    if dimension==1:
-        for i in range(len(iX)):
-            iX[i] = 1 / (1 + math.exp(-iX[i]))
-    else:
-        for i in range(len(iX)):
-            iX[i] = sigmoid(iX[i],dimension-1)
-    return iX
-
+'''
