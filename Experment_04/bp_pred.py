@@ -12,7 +12,7 @@ def bp_pred(net, x):
     theta = net['theta']
     w = net['w']
     alpha = np.dot(x.T,v)
-    b = sigmoid(alpha-gamma,1)
+    b = sigmoid(alpha-gamma,2)
     beta = np.dot(b,w)
     predictY=sigmoid(beta-theta,2)
     return predictY.T

@@ -36,9 +36,8 @@ def bp_create(x, t, hiddenLayerNum=0, eta=1.0, limit=0.001, maxNum=10, hiddenLay
     
     while (sum_count < maxNum) :
         #输入层*权值
-        sum_count += 1
         alpha = np.dot(x.T,v)
-        #得到隐层输入
+        #得到隐层输出
         b = sigmoid(alpha-gamma,2)         
         #隐层输出*权值
         beta = np.dot(b,w)        
@@ -54,7 +53,7 @@ def bp_create(x, t, hiddenLayerNum=0, eta=1.0, limit=0.001, maxNum=10, hiddenLay
         w += eta*np.dot(b.T,g)
         #更新阈值
         theta -= eta*g
-        #更新权值
+        #更新权值v
         v += eta * np.dot(x ,e)
         #更新隐层阈值
         gamma -= eta*g
@@ -64,8 +63,8 @@ def bp_create(x, t, hiddenLayerNum=0, eta=1.0, limit=0.001, maxNum=10, hiddenLay
         else :    
             sum_count = 0 
 
-    dict = {'v':v,'gamma':gamma,'theta':theta,'w':w} 
-    return dict,predictY,E_iter
+    net = {'v':v,'gamma':gamma,'theta':theta,'w':w} 
+    return net,predictY,E_iter
 
 #iX is a matrix with a dimension
 def sigmoid(iX,dimension):
