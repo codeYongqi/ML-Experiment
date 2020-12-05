@@ -26,7 +26,7 @@ for ii in range(9):
         att['values'] = atts[0, ii]['values'][0][0]
         att['continue'] = atts[0, ii]['continue'][0][0][0][0]
         att['id'] = atts[0, ii]['id'][0][0][0][0]
-    elif ii < 8:    #连续属性
+    elif ii < 8:    # 连续属性
         att['name'] = atts[0, ii]['name'][0][0][0]
         att['continue'] = atts[0, ii]['continue'][0][0][0][0]
         att['id'] = atts[0, ii]['id'][0][0][0][0]
@@ -35,7 +35,6 @@ for ii in range(9):
         att['values'] = atts[0, ii]['values'][0][0]
 
     A.append(att)
-#print(D)
 
 # 测试样本                                             
 testSample = np.array([11, 21, 31, 41, 51, 61, 0.697, 0.460])
@@ -44,7 +43,7 @@ testSample = np.array([11, 21, 31, 41, 51, 61, 0.697, 0.460])
 
 # 训练拉普拉斯修正的朴素贝叶斯分类器 D（17，8）D_labels(17,1)
 nbModel = nbc_train(D, D_labels, A, 1)
-print(nbModel)
+
 
 
 # 测试样本分类

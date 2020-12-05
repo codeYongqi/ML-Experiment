@@ -17,12 +17,14 @@ plt.rcParams['font.sans-serif'] = ['SimHei']
 #用来正常显示符号
 plt.rcParams['axes.unicode_minus'] = False
 
-data_path = '/Users/zhuyongqi/Downloads/watermelon_3.mat'
+data_path = '/Users/zhuyongqi/Desktop/机器学习/数据集/COIL20.mat'
 
 # 读取 mat 文件中的数据
 data_dic = scio.loadmat(data_path)
-data = data_dic['watermelon_3']
+#data = data_dic['watermelon_3a']
+print(data_dic['fea'])
 
+'''
 
 # 生成样本集和对应的类别标记
 x = preprocessing.MinMaxScaler().fit_transform(data[:, 0:8]) * 2 - 1    # 对样本集的每个属性进行归一化
@@ -48,3 +50,4 @@ E = ((y_new - t) ** 2).mean()
 # 计算错误率
 err_rate = (np.abs(np.round(y_new) - t)).mean()
 print(err_rate)
+'''

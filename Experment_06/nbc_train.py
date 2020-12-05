@@ -43,16 +43,13 @@ def nbc_train(D, D_labels, A, lp=1):
                 p_this_bad  = 0
                 for j in range (train_num):
                     if (D[j][k] == this_id):
-                        #print(D_labels[j])
                         if(D_labels[j] == 1):
                             p_this_good += 1
                         elif (D_labels[j] == 0):
                             p_this_bad  += 1
                 
-                #p_this_good = (p_this_good + 1 ) / ( num_good_watermelon + len(A[k]['values']))
-                #p_this_bad  = (p_this_bad + 1)   / (num_bad_watermelon  + len(A[k]['values']))
-                p_this_good = (p_this_good  ) / ( num_good_watermelon )
-                p_this_bad  = (p_this_bad )   / (num_bad_watermelon  )
+                p_this_good = (p_this_good + 1 ) / ( num_good_watermelon + len(A[k]['values']))
+                p_this_bad  = (p_this_bad + 1)   / (num_bad_watermelon   + len(A[k]['values']))
                 p_con = [p_this_good,p_this_bad]
                 this_model[this_id] = p_con
             
